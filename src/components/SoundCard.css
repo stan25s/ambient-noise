@@ -44,8 +44,27 @@ input[type=range] {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
     height: 6px;
+    border-radius: 6px;
     background: var(--text);
     align-self: flex-end;
+    cursor: pointer;
+}
+
+::-webkit-slider-thumb {
+    appearance: none;
+    background: var(--text-h);
+    outline: none;
+    border-radius: 15px;
+    width: 15px;
+    height: 15px;
+}
+
+::-moz-slider-thumb {
+    background: var(--text-h);
+    outline: none;
+    border-radius: 15px;
+    width: 15px;
+    height: 15px;
 }
 
 img {
@@ -54,6 +73,7 @@ img {
     image-rendering: crisp-edges;
     width: 100%;
     height: auto;
+    pointer-events: none;
 }
 
 span {

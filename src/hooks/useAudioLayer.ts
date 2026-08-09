@@ -1,61 +1,65 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
+import { getSharedAudioContext } from './sharedAudioContext';
 
 export function useAudioLayer(url: string) {
-  const audioCtxRef = useRef<AudioContext | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
-  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
-  const bufferRef = useRef<AudioBuffer | null>(null);
+  const sourceNodeRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
-  const [isBufferLoaded, setIsBufferLoaded] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
-  // Load and decode the audio file once:
+  // Load and decode the audio file once using the shared audio context:
   useEffect(() => {
-    const ctx = new AudioContext();
-    audioCtxRef.current = ctx;
+    const ctx = getSharedAudioContext();
+    const audio = new Audio(url);
+    audio.src = url;
+    audio.loop = true;
+    audio.preload = 'metadata';
+    audio.crossOrigin = 'anonymous';
 
+    const sourceNode = ctx.createMediaElementSource(audio);
     const gainNode = ctx.createGain();
     gainNode.gain.value = volume;
+    sourceNode.connect(gainNode);
     gainNode.connect(ctx.destination);
-    gainNodeRef.current = gainNode;
 
-    fetch(url)
-        .then((res) => res.arrayBuffer())
-        .then((data) => ctx.decodeAudioData(data))
-        .then((decoded) => {
-            bufferRef.current = decoded;
-            setIsBufferLoaded(true);
-        });
+    audioRef.current = audio;
+    gainNodeRef.current = gainNode;
+    sourceNodeRef.current = sourceNode;
+
+    const handleCanPlay = () => setIsReady(true);
+    audio.addEventListener('canplay', handleCanPlay);
 
     return () => {
-        sourceRef.current?.stop();
-        ctx.close();
+      audio.pause();
+      audio.removeEventListener('canplay',handleCanPlay);
+      sourceNode.disconnect();
+      gainNode.disconnect();
     };
   }, [url]);
 
-  const play = useCallback(() => {
-    const ctx = audioCtxRef.current;
-    const buffer = bufferRef.current;
-    const gainNode = gainNodeRef.current;
-    
-    // Only proceed if all dependencies are ready
-    if (!ctx || !buffer || !gainNode) return;
+  const play = useCallback(async () => {
+    const audio = audioRef.current;
+    const ctx = getSharedAudioContext();
 
-    const source = ctx.createBufferSource();
-    source.buffer = buffer;
-    source.loop = true;
-    source.connect(gainNode);
-    source.start();
+    // Check audio is ready before proceeding.
+    if (!audio) return;
+    if (ctx.state === 'suspended') {
+      await ctx.resume();
+    }
 
-    sourceRef.current = source;
+    await audio.play();
     setIsPlaying(true);
+    
   }, []);
 
   const stop = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.pause();
     setIsPlaying(false);
-    sourceRef.current?.stop();
-    sourceRef.current = null;
   }, []);
 
   const setVolumeLevel = useCallback((level: number) => {
@@ -65,5 +69,5 @@ export function useAudioLayer(url: string) {
     setVolume(level);
   }, []);
 
-  return { isPlaying, volume, play, stop, setVolume: setVolumeLevel, isBufferLoaded };
+  return { isPlaying, volume, play, stop, setVolume: setVolumeLevel, isReady };
 }

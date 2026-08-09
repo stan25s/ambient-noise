@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import './SoundCard.css';
 
 function SoundCard({ sound }: { sound: SoundProps }) {
-    const { isPlaying, volume, play, stop, setVolume, isBufferLoaded } = useAudioLayer(sound.soundUrl);
+    const { isReady, isPlaying, volume, play, stop, setVolume } = useAudioLayer(sound.soundUrl);
 
     const [localIsPlaying, setLocalIsPlaying] = useState(false);
     const [isPending, setIsPending] = useState(false);
@@ -30,8 +30,8 @@ function SoundCard({ sound }: { sound: SoundProps }) {
     }, [localIsPlaying, isPlaying]);
     
     function playingToggle() {
-        // Prevent interaction if buffer not loaded
-        if (!isBufferLoaded) return;
+        // Prevent interaction if audio not yet ready:
+        if (!isReady) return;
 
         // Debounce: prevent rapid clicks while operation is in progress
         if (isDebounced) return;
@@ -71,7 +71,7 @@ function SoundCard({ sound }: { sound: SoundProps }) {
         }
     }
 
-    const cardState = !isBufferLoaded ? 'loading' : (isPending ? 'pending' : (localIsPlaying ? 'active' : 'inactive'));
+    const cardState = !isReady ? 'loading' : (isPending ? 'pending' : (localIsPlaying ? 'active' : 'inactive'));
 
     return (
         <div className={`sound ${cardState}`}>
@@ -80,7 +80,7 @@ function SoundCard({ sound }: { sound: SoundProps }) {
                 <span>{sound.name}</span>
             </div>
             <input 
-                    disabled={!localIsPlaying || isPending || !isBufferLoaded}
+                    disabled={!localIsPlaying || isPending || !isReady}
                     type="range"
                     min={0}
                     max={1}
