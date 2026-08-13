@@ -21,13 +21,7 @@
 
 .header {
     width: 100%;
-    /* background-color: var(--social-bg); */
     text-align: left;
     padding-left: 10px;
     border-bottom: 2px solid var(--border);
 }
-
-/* .header-text {
-    left:0;
-    text-align: left;
-} */

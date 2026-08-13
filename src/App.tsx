@@ -15,9 +15,9 @@ function App() {
       <SoundMenu sounds={noiseSounds} title="noise"/>
 
       <div className='Footer'>
-        <div className='subtle'>by Stan</div>
+        <div className='subtle'>by Stanley Smith<br/> audio files sourced from <a href='https://pixabay.com/'>pixabay</a> and <a href='https://mixkit.co/free-sound-effects/'>mixkit</a></div>
         <div id='Spacer'></div>
-        <div className='subtle'>quiet v0.1</div>
+        <div className='subtle'><br/>quiet v0.1</div>
       </div>
     </div>
   )

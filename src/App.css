@@ -22,6 +22,7 @@
 .subtle {
   min-width: fit-content;
   padding: 10px;
+  text-align: left;
 }
 
 #Spacer {

@@ -8,74 +8,43 @@ export type soundArray = SoundProps[];
 
 const base = import.meta.env.VITE_CLOUDFLARE_BASE_URL
 
-export const rainSound : SoundProps = {
+const rainSound : SoundProps = {
     name : "rain",
     soundUrl : base + "/rain-long-loop.wav",
     iconUrl : "icons/rain.png"
 }
-
-export const rain1Sound : SoundProps = {
+const rain1Sound : SoundProps = {
     name : "tropical rain",
     soundUrl : base + "/tropical-rain.wav",
     iconUrl : "icons/rain.png"
 }
-
-export const rain2Sound : SoundProps = {
+const rain2Sound : SoundProps = {
     name : "rain on a metal roof",
     soundUrl : base + "/rain-metal-roof.wav",
     iconUrl : "icons/rain.png"
 }
-
-export const fireplaceSound : SoundProps = {
+const fireplaceSound : SoundProps = {
     name : "crackling fire",
     soundUrl : base + "/fireplace.wav",
     iconUrl : "icons/campfire.png"
 }
-
-export const pondSound : SoundProps = {
+const pondSound : SoundProps = {
     name : "pond",
     soundUrl : base + "/pond-ambience.wav",
     iconUrl : "icons/pond-outline.png"
 }
-
-export const forestSound : SoundProps = {
+const forestSound : SoundProps = {
     name : "forest",
     soundUrl : base + "/forest-ambience.wav",
     iconUrl : "icons/forest.png"
 }
-
-export const whiteNoiseSound : SoundProps = {
-    name : "white noise",
-    soundUrl : base + "/white-noise.wav",
-    iconUrl : "icons/white-noise.png"
-}
-export const pinkNoiseSound : SoundProps = {
-    name : "pink noise",
-    soundUrl : base + "/pink-noise.wav",
-    iconUrl : "icons/white-noise.png"
-}
-export const brownNoiseSound : SoundProps = {
-    name : "brown noise",
-    soundUrl : base + "/brown-noise.wav",
-    iconUrl : "icons/white-noise.png"
-}
-
-export const thunderSound : SoundProps = {
+const thunderSound : SoundProps = {
     name : "thunder",
     soundUrl : base + "/thunder.wav",
     iconUrl : "icons/thunder.png"
 }
-export const cafeSound : SoundProps = {
-    name : "cafe",
-    soundUrl : base + "/cafe.wav",
-    iconUrl : "icons/coffee_shop.png"
-}
-// Declare some arrays of sounds to create separate menus:
-export const noiseSounds : soundArray = [
-    whiteNoiseSound,
-    pinkNoiseSound,
-    brownNoiseSound
-]
+
+// combine into a group
 export const natureSounds : soundArray = [
     rainSound,
     rain1Sound,
@@ -85,6 +54,35 @@ export const natureSounds : soundArray = [
     forestSound,
     thunderSound
 ]
+
+const whiteNoiseSound : SoundProps = {
+    name : "white noise",
+    soundUrl : base + "/white-noise.wav",
+    iconUrl : "icons/white-noise.png"
+}
+const pinkNoiseSound : SoundProps = {
+    name : "pink noise",
+    soundUrl : base + "/pink-noise.wav",
+    iconUrl : "icons/white-noise.png"
+}
+const brownNoiseSound : SoundProps = {
+    name : "brown noise",
+    soundUrl : base + "/brown-noise.wav",
+    iconUrl : "icons/white-noise.png"
+}
+// combine into a group
+export const noiseSounds : soundArray = [
+    whiteNoiseSound,
+    pinkNoiseSound,
+    brownNoiseSound
+]
+
+const cafeSound : SoundProps = {
+    name : "cafe",
+    soundUrl : base + "/cafe.wav",
+    iconUrl : "icons/coffee_shop.png"
+}
+// combine into a group
 export const environmentSounds : soundArray = [
     cafeSound
 ]
