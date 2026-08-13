@@ -1,5 +1,6 @@
 import './App.css'
 import SoundMenu from './components/SoundMenu.tsx';
+import { noiseSounds, natureSounds, environmentSounds } from './data/sounds.ts';
 
 function App() {
 
@@ -8,7 +9,11 @@ function App() {
       <h1>quiet<strong>_soundscape</strong></h1>
       <p>Whether you are looking for some background sounds for focus or for sleep, you're in the right place.</p>
       <p>Click on any of the icons below to activate the sounds and start mixing your own soundscape.</p>
-      <SoundMenu />
+
+      <SoundMenu sounds={natureSounds} title="nature"/>
+      <SoundMenu sounds={environmentSounds} title="environments"/>
+      <SoundMenu sounds={noiseSounds} title="noise"/>
+
       <div className='Footer'>
         <div className='subtle'>by Stan</div>
         <div id='Spacer'></div>

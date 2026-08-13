@@ -1,18 +1,16 @@
 import SoundCard from "./SoundCard";
-import { rainSound, rain1Sound, rain2Sound, pondSound, forestSound, fireplaceSound, whiteNoiseSound, thunderSound} from "../data/sounds";
+import type { soundArray } from "../data/sounds";
 import './SoundMenu.css';
 
-function SoundMenu() {
+function SoundMenu({ sounds, title }: { sounds: soundArray, title: String }) {
     return (
-        <div className="card-container">
-            <SoundCard sound={pondSound} />
-            <SoundCard sound={forestSound} />
-            <SoundCard sound={fireplaceSound} />
-            <SoundCard sound={whiteNoiseSound} />
-            <SoundCard sound={rainSound} />
-            <SoundCard sound={rain1Sound} />
-            <SoundCard sound={rain2Sound} />
-            <SoundCard sound={thunderSound} />
+        <div className="sound-menu-container">
+            <div className="header">
+                {title}
+            </div>
+            <div className="card-container">
+                {sounds.map(sound => <SoundCard sound={sound}/>)}
+            </div>
         </div>
     )
 }

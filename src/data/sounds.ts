@@ -4,6 +4,8 @@ export interface SoundProps {
     iconUrl:string,
 }
 
+export type soundArray = SoundProps[];
+
 const base = import.meta.env.VITE_CLOUDFLARE_BASE_URL
 
 export const rainSound : SoundProps = {
@@ -47,8 +49,42 @@ export const whiteNoiseSound : SoundProps = {
     soundUrl : base + "/white-noise.wav",
     iconUrl : "icons/white-noise.png"
 }
+export const pinkNoiseSound : SoundProps = {
+    name : "pink noise",
+    soundUrl : base + "/pink-noise.wav",
+    iconUrl : "icons/white-noise.png"
+}
+export const brownNoiseSound : SoundProps = {
+    name : "brown noise",
+    soundUrl : base + "/brown-noise.wav",
+    iconUrl : "icons/white-noise.png"
+}
+
 export const thunderSound : SoundProps = {
     name : "thunder",
     soundUrl : base + "/thunder.wav",
     iconUrl : "icons/thunder.png"
 }
+export const cafeSound : SoundProps = {
+    name : "cafe",
+    soundUrl : base + "/cafe.wav",
+    iconUrl : "icons/coffee_shop.png"
+}
+// Declare some arrays of sounds to create separate menus:
+export const noiseSounds : soundArray = [
+    whiteNoiseSound,
+    pinkNoiseSound,
+    brownNoiseSound
+]
+export const natureSounds : soundArray = [
+    rainSound,
+    rain2Sound,
+    rainSound,
+    pondSound,
+    fireplaceSound,
+    forestSound,
+    thunderSound
+]
+export const environmentSounds : soundArray = [
+    cafeSound
+]
