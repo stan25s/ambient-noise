@@ -78,8 +78,8 @@ export const noiseSounds : soundArray = [
 ]
 export const natureSounds : soundArray = [
     rainSound,
+    rain1Sound,
     rain2Sound,
-    rainSound,
     pondSound,
     fireplaceSound,
     forestSound,
