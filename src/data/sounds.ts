@@ -43,6 +43,11 @@ const thunderSound : SoundProps = {
     soundUrl : base + "/thunder.wav",
     iconUrl : "icons/thunder.png"
 }
+const oceanSound : SoundProps = {
+    name : "ocean",
+    soundUrl : base + "/sea-waves.wav",
+    iconUrl : "icons/waves.png"
+}
 
 // combine into a group
 export const natureSounds : soundArray = [
@@ -52,7 +57,8 @@ export const natureSounds : soundArray = [
     pondSound,
     fireplaceSound,
     forestSound,
-    thunderSound
+    thunderSound,
+    oceanSound
 ]
 
 const whiteNoiseSound : SoundProps = {
