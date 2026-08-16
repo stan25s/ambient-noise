@@ -6,9 +6,9 @@ div.sound {
     border-radius: 5px;
     gap: 5px;
     grid-template-columns: auto;
-    width: 150px;
-    min-width: 150px;
-    height: 230px;
+    width: 120px;
+    min-width: 120px;
+    height: 200px;
     transition: border-color 0.15s ease-out, opacity 0.15s ease-out;
     background-color: var(--code-bg);
 }
@@ -16,8 +16,8 @@ div.sound {
 
   @media (max-width: 1024px) {
     div.sound {
-        width: 110px;
-        min-width: 110px;
+        width: 100px;
+        min-width: 100px;
         height: 180px;
     }
   }
@@ -39,33 +39,6 @@ div.sound.inactive {
 div.sound.loading {
     opacity: 0.5;
     cursor: wait;
-}
-
-input[type=range] {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    height: 6px;
-    border-radius: 6px;
-    background: var(--text);
-    align-self: flex-end;
-    cursor: pointer;
-}
-
-::-webkit-slider-thumb {
-    appearance: none;
-    background: var(--text-h);
-    outline: none;
-    border-radius: 15px;
-    width: 15px;
-    height: 15px;
-}
-
-::-moz-slider-thumb {
-    background: var(--text-h);
-    outline: none;
-    border-radius: 15px;
-    width: 15px;
-    height: 15px;
 }
 
 img {
