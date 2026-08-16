@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import './App.css'
 import SoundMenu from './components/SoundMenu.tsx';
-import { noiseSounds, natureSounds, environmentSounds, allSounds } from './data/sounds.ts';
+import { allSounds } from './data/sounds.ts';
 import MasterControl from './components/MasterControl.tsx';
 
 function App() {
 
-  const [masterIsPlaying, setMasterIsPlaying] = useState(false);
+  // const [masterIsPlaying, setMasterIsPlaying] = useState(false);
   const [masterVolume, setMasterVolume] = useState(1.0);
 
-  function toggleMasterIsPlaying() {
-    if (masterIsPlaying) {
-      setMasterIsPlaying(false);
-    } else {
-      setMasterIsPlaying(true);
-    }
-  }
+  // function toggleMasterIsPlaying() {
+  //   if (masterIsPlaying) {
+  //     setMasterIsPlaying(false);
+  //   } else {
+  //     setMasterIsPlaying(true);
+  //   }
+  // }
 
   return (
     <div className="App" id='app'>
