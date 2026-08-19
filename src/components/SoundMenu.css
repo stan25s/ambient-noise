@@ -42,35 +42,50 @@
     transition: background-color 0.15s ease-out;
 }
 
-.tag.active {
-    background-color: #121212;
-    color: white;
-    transition: background-color 0.15s ease-out;
-}
 
 .tag.inactive {
-    opacity: 0.9;
+    opacity: 0.5;
 }
 
-#rain {
+.spacer {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--social-bg);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#rain{
     background-color: #2d445f;
     border-color: #6ea8e9;
+}
+#rain.active {
+    background-color: #6ea8e9;
+    color: var(--bg);
 }
 #noise {
     background-color: #332d64;
     border-color: #8074ee;
 }
+#noise.active {
+    background-color: #8074ee;
+    color: var(--bg);
+}
 #ambience {
     background-color: #5e3227;
     border-color: #e67c61;
 }
-#nature.inactive {
+#ambience.active {
+    background-color: #e67c61;
+    color: var(--bg);
+}
+#nature {
     background-color: #193d2c;
     border-color: #58c994;
 }
 #nature.active {
-    background-color: #193d2c;
-    background-color: #4cb986;
-    color: var(--bg)
+    background-color: #58c994;
+    color: var(--bg);
 }
 

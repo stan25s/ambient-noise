@@ -49,6 +49,10 @@ function SoundMenu({ sounds, masterVolume }: { sounds: soundArray, masterVolume:
                     <div className="tag active" id={category.name} onClick={() => onClickCategory(category.id)}>
                         {category.name}
                     </div>)}
+
+                {(categoryArray.filter((category) => category.active == true).length > 0) ? 
+                (<div className="spacer"/>) : (null)}
+
                 {/* then all the inactive categories: */}
                 {categoryArray.filter((category) => category.active != true).map(category =>
                     <div className="tag inactive" id={category.name} onClick={() => onClickCategory(category.id)}>
@@ -59,10 +63,17 @@ function SoundMenu({ sounds, masterVolume }: { sounds: soundArray, masterVolume:
                 {/* if all categories are active, or all categories are inactive, display full set of cards normally. */}
                 {/* otherwise dispplay active-category cards first, followed by inactive-category cards (with a decreased opacity) */}
                 
-                    {(sounds.filter((s) => areTheseCategoriesActive(s.categories)).map
-                        (sound => <SoundCard sound={sound} masterVolume={masterVolume} categorySelected={true}/>))}
+                    {
+                    (sounds.filter((s) => areTheseCategoriesActive(s.categories)).map
+                        (sound => {
+                            const isInActiveCategory: boolean = true;
+                            return (<SoundCard sound={sound} masterVolume={masterVolume} isInActiveCategory={isInActiveCategory}/>)
+                        }))}
                     {(sounds.filter((s) => !areTheseCategoriesActive(s.categories)).map
-                        (sound => <SoundCard sound={sound} masterVolume={masterVolume} categorySelected={true}/>))}
+                        (sound => {
+                            const isInActiveCategory: boolean = false;
+                            return (<SoundCard sound={sound} masterVolume={masterVolume} isInActiveCategory={isInActiveCategory}/>)
+                        }))}
             </div>
         </div>
     )
