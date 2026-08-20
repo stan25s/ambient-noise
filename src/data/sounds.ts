@@ -51,13 +51,19 @@ const rainSound : SoundProps = {
 const rain1Sound : SoundProps = {
     name : "tropical rain",
     soundUrl : base + "/tropical-rain.wav",
-    iconUrl : "icons/rain.png",
+    iconUrl : "icons/tropical_rain.png",
     categories : [0, 3]
 }
 const rain2Sound : SoundProps = {
     name : "rain on a metal roof",
     soundUrl : base + "/rain-metal-roof.wav",
     iconUrl : "icons/rain.png",
+    categories : [0, 3]
+}
+const rain3Sound : SoundProps = {
+    name : "rain on a tent",
+    soundUrl : base + "/tent-rain.wav",
+    iconUrl : "icons/tent.png",
     categories : [0, 3]
 }
 const fireplaceSound : SoundProps = {
@@ -94,12 +100,13 @@ const oceanSound : SoundProps = {
 // combine into a group
 export const natureSounds : soundArray = [
     rainSound,
-    rain1Sound,
-    rain2Sound,
-    pondSound,
     fireplaceSound,
-    forestSound,
+    rain1Sound,
     thunderSound,
+    rain2Sound,
+    forestSound,
+    rain3Sound,
+    pondSound,
     oceanSound
 ]
 
