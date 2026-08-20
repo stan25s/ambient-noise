@@ -14,18 +14,27 @@ div.sound {
 }
 
 
-  @media (max-width: 1024px) {
+@media (max-width: 1024px) {
     div.sound {
         width: 100px;
         min-width: 100px;
         height: 180px;
     }
-  }
+}
 
+/* sound is active */
 div.sound.active {
     border-color: var(--accent-border);
-    background-color: var(--accent-bg);
+    background-color: var(--card-playing-bg);
 }
+div.sound.true {
+    background-color: var(--card-active-notplaying-bg);
+}
+/* sound is active and category is active */
+div.sound.active.true {
+    background-color: var(--card-active-playing-bg);
+}
+
 
 div.sound.pending {
     border-color: var(--accent-border);
@@ -40,6 +49,8 @@ div.sound.loading {
     opacity: 0.5;
     cursor: wait;
 }
+
+div.sound.true {}
 
 img {
     image-rendering: pixelated;
@@ -62,4 +73,3 @@ input:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
-

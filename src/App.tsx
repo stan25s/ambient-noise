@@ -6,16 +6,7 @@ import MasterControl from './components/MasterControl.tsx';
 
 function App() {
 
-  // const [masterIsPlaying, setMasterIsPlaying] = useState(false);
   const [masterVolume, setMasterVolume] = useState(1.0);
-
-  // function toggleMasterIsPlaying() {
-  //   if (masterIsPlaying) {
-  //     setMasterIsPlaying(false);
-  //   } else {
-  //     setMasterIsPlaying(true);
-  //   }
-  // }
 
   return (
     <div className="App" id='app'>
@@ -23,10 +14,8 @@ function App() {
       <p>Whether you are looking for some background sounds for focus or for sleep, you're in the right place.</p>
       <p>Click on any of the icons below to activate the sounds and start mixing your own soundscape.</p>
 
-      {/* <SoundMenu sounds={natureSounds} title="nature"/>
-      <SoundMenu sounds={environmentSounds} title="environments"/>
-      <SoundMenu sounds={noiseSounds} title="noise"/> */}
       <SoundMenu sounds={allSounds} masterVolume={masterVolume}/>
+
       <MasterControl 
         masterVolume={masterVolume}
         setVolume={setMasterVolume} />

@@ -6,6 +6,11 @@
   --code-bg: #212129;
   --accent: #84a2fc;
   --accent-bg: rgba(132, 160, 252, 0.15);
+
+  --card-playing-bg: rgba(132, 160, 252, 0.2);
+  --card-active-playing-bg: rgba(132, 160, 252, 0.3);
+  --card-active-notplaying-bg: rgba(132, 160, 252, 0.1);
+
   --accent-border: rgba(132, 172, 252, 0.5);
   --social-bg: rgba(47, 48, 58, 0.5);
   --shadow:

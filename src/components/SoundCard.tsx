@@ -4,7 +4,7 @@ import { useAudioLayer } from '../hooks/useAudioLayer.ts';
 import { useState, useEffect, useRef } from 'react';
 import './SoundCard.css';
 
-function SoundCard({ sound, masterVolume }: { sound: SoundProps, masterVolume: number }) {
+function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundProps, masterVolume: number, isInActiveCategory: boolean }) {
     const { isReady, isPlaying, volume, play, stop, setVolume } = useAudioLayer(sound.soundUrl);
 
     const [cardDisplayVolume, setCardDisplayVolume] = useState(1.0);
@@ -90,7 +90,7 @@ function SoundCard({ sound, masterVolume }: { sound: SoundProps, masterVolume: n
     }
 
     return (
-        <div className={`sound ${cardState}`}>
+        <div className={`sound ${cardState} ${isInActiveCategory}`}>
             <div className="card-display" onClick={playingToggle}>
                 <img src={sound.iconUrl} alt={sound.name + " icon"} className={`${cardState}`}/>
                 <span>{sound.name}</span>
