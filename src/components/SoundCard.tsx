@@ -15,9 +15,9 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
 
 
     useEffect(() => {
-        console.log("master_change, card_vol:"+volume + ", masterVol"+masterVolume);
+        console.log("master_change, card_vol:" + volume + ", masterVol" + masterVolume);
         setVolume(cardDisplayVolume * masterVolume);
-        console.log("master_change, new_card_vol:"+volume + ", masterVol"+masterVolume);
+        console.log("master_change, new_card_vol:" + volume + ", masterVol" + masterVolume);
     }, [masterVolume])
 
     // Sync recovery: if hook state diverges from local state after 300ms, resync
@@ -28,7 +28,6 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
 
         const timeoutId = setTimeout(() => {
             if (localIsPlaying !== isPlaying) {
-                console.warn('State mismatch detected, resyncing...');
                 setLocalIsPlaying(isPlaying);
                 setIsPending(false);
             }
@@ -36,7 +35,7 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
 
         return () => clearTimeout(timeoutId);
     }, [localIsPlaying, isPlaying]);
-    
+
     function playingToggle() {
         // Prevent interaction if audio not yet ready:
         if (!isReady) return;
@@ -82,28 +81,28 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
     const cardState = !isReady ? 'loading' : (isPending ? 'pending' : (localIsPlaying ? 'active' : 'inactive'));
 
 
-    function updateVolume(value:number) {
-        console.log("value:"+value + ", masterVol"+masterVolume);
+    function updateVolume(value: number) {
+        console.log("value:" + value + ", masterVol" + masterVolume);
         setCardDisplayVolume(value);
         setVolume(value * masterVolume);
-        console.log("new_card_vol:"+volume);
+        console.log("new_card_vol:" + volume);
     }
 
     return (
         <div className={`sound ${cardState} ${isInActiveCategory}`}>
             <div className="card-display" onClick={playingToggle}>
-                <img src={sound.iconUrl} alt={sound.name + " icon"} className={`${cardState}`}/>
+                <img src={sound.iconUrl} alt={sound.name + " icon"} className={`${cardState}`} />
                 <span>{sound.name}</span>
             </div>
-            <input 
-                    disabled={!localIsPlaying || isPending || !isReady}
-                    type="range"
-                    min={0}
-                    max={1}
-                    step={0.05}
-                    value={cardDisplayVolume}
-                    onChange={(e) => updateVolume(parseFloat(e.target.value))}
-                />
+            <input
+                disabled={!localIsPlaying || isPending || !isReady}
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={cardDisplayVolume}
+                onChange={(e) => updateVolume(parseFloat(e.target.value))}
+            />
         </div>
     );
 }

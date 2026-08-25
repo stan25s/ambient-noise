@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './App.css'
 import SoundMenu from './components/SoundMenu.tsx';
-import { allSounds } from './data/sounds.ts';
 import MasterControl from './components/MasterControl.tsx';
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
       <p>Whether you are looking for some background sounds for focus or for sleep, you're in the right place.</p>
       <p>Click on any of the icons below to activate the sounds and start mixing your own soundscape.</p>
 
-      <SoundMenu sounds={allSounds} masterVolume={masterVolume}/>
+      <SoundMenu masterVolume={masterVolume}/>
 
       <MasterControl 
         masterVolume={masterVolume}
