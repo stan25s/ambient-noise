@@ -1,10 +1,8 @@
 //import SoundControl from '../SoundControl.tsx';
 import type { SoundProps } from '../data/sounds.ts';
-import { useAudioLayer } from '../hooks/useAudioLayer.ts';
-import { useState, useEffect, useRef } from 'react';
 import './MenuSoundCard.css';
 
-function MenuSoundCard({ sound, masterVolume, isInActiveCategory, onClick }: { sound: SoundProps, masterVolume: number, isInActiveCategory: boolean, onClick: Function }) {
+function MenuSoundCard({ sound, isInActiveCategory, onClick }: { sound: SoundProps, masterVolume: number, isInActiveCategory: boolean, onClick: Function }) {
     return (
         <div className={`sound ${isInActiveCategory}`}>
             <div className="card-display" onClick={() => onClick(sound.id)}>

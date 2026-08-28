@@ -1,9 +1,9 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import type { SoundProps } from '../data/sounds.ts';
 import SoundCard from './SoundCard.tsx';
 import './MasterControl.css';
 
-function MasterControl({ masterVolume, setVolume, activeCards, setActiveCards }:
+function MasterControl({ masterVolume, setVolume, activeCards }:
     { masterVolume: number, setVolume: Function, activeCards: SoundProps[], setActiveCards: Function }
 ) {
 
