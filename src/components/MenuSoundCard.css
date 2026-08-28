@@ -27,11 +27,9 @@ div.sound.active {
     border-color: var(--accent-border);
     background-color: var(--card-playing-bg);
 }
-
 div.sound.true {
     background-color: var(--card-active-notplaying-bg);
 }
-
 /* sound is active and category is active */
 div.sound.active.true {
     background-color: var(--card-active-playing-bg);
@@ -52,14 +50,14 @@ div.sound.loading {
     cursor: wait;
 }
 
-img.sound-icon {
-    width: 90%;
-    height: auto;
+div.sound.true {}
 
-
+img {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
+    width: 100%;
+    height: auto;
     pointer-events: none;
 }
 

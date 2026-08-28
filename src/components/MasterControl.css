@@ -1,21 +1,43 @@
 
-.floating-controls {
+.master-controls {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    height: fit-content;
+    width: 100%;
+
+    bottom: 0px;
+    margin-top: auto;
+
+
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
+    align-items: center;
+
+    background: var(--code-bg);
+}
+
+.active-card-container {
+
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.controls-container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     gap: 20px;
-    padding: 10px 20px;
-    background: var(--code-bg);
+    padding: 20px 20px;
     color: white;
-    border: 2px solid var(--border);
-    border-radius: 5px;
 
-    height: 40px;
-    width: fit-content;
+    height: fit-content;
     z-index: 999;
 }
 
@@ -42,4 +64,10 @@
 
 input[type=range].master-volume {
   align-self:center;
+
+  writing-mode:vertical-lr;
+  direction: rtl;
+  height:100px;
+  vertical-align: middle;
+  width: 6px;
 }

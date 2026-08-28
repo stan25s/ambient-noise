@@ -6,6 +6,8 @@ export interface SoundProps {
     categories:number[]
 }
 
+export const maximumActiveCards = 3;
+
 export type soundArray = SoundProps[];
 
 const base = import.meta.env.VITE_CLOUDFLARE_BASE_URL

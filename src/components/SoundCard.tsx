@@ -4,7 +4,7 @@ import { useAudioLayer } from '../hooks/useAudioLayer.ts';
 import { useState, useEffect, useRef } from 'react';
 import './SoundCard.css';
 
-function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundProps, masterVolume: number, isInActiveCategory: boolean }) {
+function SoundCard({ sound, masterVolume }: { sound: SoundProps, masterVolume: number }) {
     const { isReady, isPlaying, volume, play, stop, setVolume } = useAudioLayer(sound.soundUrl);
 
     const [cardDisplayVolume, setCardDisplayVolume] = useState(1.0);
@@ -13,10 +13,15 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
     const [isDebounced, setIsDebounced] = useState(false);
     const debounceTimerRef = useRef<number | null>(null);
 
+    const [isMuted, setIsMuted] = useState(false);
 
     useEffect(() => {
+        let mutedMultiplier = 1;
+        if (isMuted) {
+            mutedMultiplier = 0;
+        }
         console.log("master_change, card_vol:" + volume + ", masterVol" + masterVolume);
-        setVolume(cardDisplayVolume * masterVolume);
+        setVolume(cardDisplayVolume * masterVolume * mutedMultiplier);
         console.log("master_change, new_card_vol:" + volume + ", masterVol" + masterVolume);
     }, [masterVolume])
 
@@ -35,6 +40,16 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
 
         return () => clearTimeout(timeoutId);
     }, [localIsPlaying, isPlaying]);
+
+    function toggleMute() {
+        if (!isMuted) {
+            setIsMuted(true);
+            setVolume(0);
+        } else {
+            setIsMuted(false);
+            setVolume(cardDisplayVolume * masterVolume);
+        }
+    }
 
     function playingToggle() {
         // Prevent interaction if audio not yet ready:
@@ -82,6 +97,9 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
 
 
     function updateVolume(value: number) {
+        //user has changed volume, so unset the muted state.
+        setIsMuted(false);
+
         console.log("value:" + value + ", masterVol" + masterVolume);
         setCardDisplayVolume(value);
         setVolume(value * masterVolume);
@@ -89,11 +107,18 @@ function SoundCard({ sound, masterVolume, isInActiveCategory }: { sound: SoundPr
     }
 
     return (
-        <div className={`sound ${cardState} ${isInActiveCategory}`}>
+        <div className={`sound ${cardState}`}>
             <div className="card-display" onClick={playingToggle}>
-                <img src={sound.iconUrl} alt={sound.name + " icon"} className={`${cardState}`} />
                 <span>{sound.name}</span>
+                <img src={sound.iconUrl} alt={sound.name + " icon"} className={`sound-icon`} />
             </div>
+            <button className="mute-button"
+                title="mute"
+                onClick={() => toggleMute()}>
+                {isMuted ?
+                    (<img className="mute-image" src='icons/unmute-white.png' />) :
+                    (<img className="mute-image" src='icons/mute-white.png' />)}
+            </button>
             <input
                 disabled={!localIsPlaying || isPending || !isReady}
                 type="range"
