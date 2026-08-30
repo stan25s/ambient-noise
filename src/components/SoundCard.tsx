@@ -4,7 +4,7 @@ import { useAudioLayer } from '../hooks/useAudioLayer.ts';
 import { useState, useEffect, useRef } from 'react';
 import './SoundCard.css';
 
-function SoundCard({ sound, masterVolume }: { sound: SoundProps, masterVolume: number }) {
+function SoundCard({ sound, masterVolume, removeCard }: { sound: SoundProps, masterVolume: number, removeCard: Function }) {
     const { isReady, isPlaying, volume, play, stop, setVolume } = useAudioLayer(sound.soundUrl);
 
     const [cardDisplayVolume, setCardDisplayVolume] = useState(1.0);
@@ -107,27 +107,36 @@ function SoundCard({ sound, masterVolume }: { sound: SoundProps, masterVolume: n
     }
 
     return (
-        <div className={`sound ${cardState}`}>
-            <div className="card-display" onClick={playingToggle}>
-                <span>{sound.name}</span>
+        <div className={`card-block`}>
+            <div className={`sound ${cardState}`} onClick={() => toggleMute()}>
                 <img src={sound.iconUrl} alt={sound.name + " icon"} className={`sound-icon`} />
+                <div className="card-bottom">
+                    {sound.name}
+                </div>
             </div>
-            <button className="mute-button"
-                title="mute"
-                onClick={() => toggleMute()}>
-                {isMuted ?
-                    (<img className="mute-image" src='icons/unmute-white.png' />) :
-                    (<img className="mute-image" src='icons/mute-white.png' />)}
-            </button>
-            <input
-                disabled={!localIsPlaying || isPending || !isReady}
-                type="range"
-                min={0}
-                max={1}
-                step={0.05}
-                value={cardDisplayVolume}
-                onChange={(e) => updateVolume(parseFloat(e.target.value))}
-            />
+            <div className={`card-controls`}>
+                <button className="mute-button-card"
+                    title="mute"
+                    onClick={() => toggleMute()}>
+                    {isMuted ?
+                        (<img className="mute-image" src='icons/unmute.png' />) :
+                        (<img className="mute-image" src='icons/mute.png' />)}
+                </button>
+                <input
+                    disabled={!localIsPlaying || isPending || !isReady}
+                    className='card-volume-slider'
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={0.05}
+                    value={cardDisplayVolume}
+                    onChange={(e) => updateVolume(parseFloat(e.target.value))}
+                />
+            </div>
+            <button className="close-button"
+                    title="close"
+                    onClick={() => removeCard(sound.id)}>
+                    {(<img className="close-image" src='icons/close.png' />)}</button>
         </div>
     );
 }

@@ -1,62 +1,60 @@
-div.sound {
+div.menu-sound {
     display: grid;
-    padding: 15px;
-    margin: 5px;
-    border: 2px solid var(--border);
-    border-radius: 5px;
-    gap: 5px;
+    padding: 0;
+    border: 2px solid var(--text-h);
+    border-radius: 8px;
     grid-template-columns: auto;
-    width: 120px;
-    min-width: 120px;
-    height: 200px;
-    transition: border-color 0.15s ease-out, opacity 0.15s ease-out;
-    background-color: var(--code-bg);
+    width: var(--card-width);
+    min-width: var(--card-width);
+    height: fit-content;
+    transition: border-color 0.15s ease-out, opacity 0.15s ease-out, margin-top 0.15s ease;
+    background-color: var(--bg);
 }
 
+div.menu-sound:hover {
+    margin-top:-10px;
+}
+
+img.sound-icon-menu {
+    padding: var(--card-image-padding);
+
+    width: calc(var(--card-width) - (var(--card-image-padding) * 2));
+    height: auto;
+}
+
+.card-bottom {
+    background-color: var(--text-h);
+    padding: var(--card-bottom-padding);
+    width: calc(var(--card-width) - (var(--card-bottom-padding) * 2));
+    height: 80px;
+
+    text-wrap: wrap;
+    text-align: left;
+    color: var(--bg);
+    line-height: 20px;
+
+    font-weight: bold;
+}
 
 @media (max-width: 1024px) {
-    div.sound {
-        width: 100px;
-        min-width: 100px;
-        height: 180px;
+    div.menu-sound {
+        width: var(--small-card-width);
+        min-width: var(--small-card-width);
+    }
+
+    img.sound-icon-menu {
+        padding: var(--small-card-image-padding);
+        width: calc(var(--small-card-width) - (var(--small-card-image-padding) * 2));
+    }
+
+    .card-bottom {
+        width: calc(var(--small-card-width) - (var(--card-bottom-padding) * 2));
     }
 }
 
-/* sound is active */
-div.sound.active {
-    border-color: var(--accent-border);
-    background-color: var(--card-playing-bg);
-}
-div.sound.true {
+/* sound category is active */
+div.menu-sound.true {
     background-color: var(--card-active-notplaying-bg);
-}
-/* sound is active and category is active */
-div.sound.active.true {
-    background-color: var(--card-active-playing-bg);
-}
-
-
-div.sound.pending {
-    border-color: var(--accent-border);
-    opacity: 0.7;
-}
-
-div.sound.inactive {
-    opacity: 0.9;
-}
-
-div.sound.loading {
-    opacity: 0.5;
-    cursor: wait;
-}
-
-img {
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-    width: 100%;
-    height: auto;
-    pointer-events: none;
 }
 
 span {

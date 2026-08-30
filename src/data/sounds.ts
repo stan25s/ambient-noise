@@ -6,7 +6,7 @@ export interface SoundProps {
     categories:number[]
 }
 
-export const maximumActiveCards = 3;
+export const maximumActiveCards = 5;
 
 export type soundArray = SoundProps[];
 

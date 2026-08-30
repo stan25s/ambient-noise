@@ -20,6 +20,12 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
+  --card-width: 140px;
+  --small-card-width: 120px;
+  --card-image-padding: 20px;
+  --small-card-image-padding: 15px;
+  --card-bottom-padding: 12px;
+
   font: 18px/145% var(--mono);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -117,6 +123,9 @@ span:hover {
 
 img {
   pointer-events: none;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 input[type=range] {

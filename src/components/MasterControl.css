@@ -1,7 +1,7 @@
 
 .master-controls {
     position: fixed;
-    height: fit-content;
+    height: 280px;
     width: 100%;
 
     bottom: 0px;
@@ -22,9 +22,17 @@
     height: fit-content;
     margin: auto;
 
+    gap: 5px;
+
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.playing-title {
+    writing-mode: sideways-lr;
+    padding: 10px;
+    align-self: flex-start;
 }
 
 .controls-container {
@@ -42,15 +50,24 @@
 }
 
 .mute-image {
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
     width: 24px;
     height: 24px;
     cursor: pointer;
 }
 
 .mute-button {
+    appearance: none;
+    background:none;
+    border:none;
+    outline:none;
+    padding:0;
+    margin:0;
+    height:24px;
+    width:24px;
+    align-self: center;
+}
+
+.close-button {
     appearance: none;
     background:none;
     border:none;

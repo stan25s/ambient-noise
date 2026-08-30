@@ -3,7 +3,7 @@ import type { SoundProps } from '../data/sounds.ts';
 import SoundCard from './SoundCard.tsx';
 import './MasterControl.css';
 
-function MasterControl({ masterVolume, setVolume, activeCards }:
+function MasterControl({ masterVolume, setVolume, activeCards, setActiveCards }:
     { masterVolume: number, setVolume: Function, activeCards: SoundProps[], setActiveCards: Function }
 ) {
 
@@ -28,6 +28,22 @@ function MasterControl({ masterVolume, setVolume, activeCards }:
         }
     }
 
+    function removeFromActiveCards(soundCardId: string) {
+        const foundIndex = activeCards.findIndex((sound) => sound.id === soundCardId);
+
+        if (foundIndex != -1) {
+            // create a new array instead of mutating the existing one so React
+            // sees a new reference and re-renders immediately
+            const tempActiveCards = (activeCards ?? []).filter((s) => s.id !== soundCardId);
+            setActiveCards(tempActiveCards);
+            console.log(`removing ${foundIndex}`);
+            return;
+        } else {
+            console.warn(`removeFromActiveCards: sound id not found: ${soundCardId}`);
+            return;
+        }
+    }
+
     function emptySoundCard() {
         return (
             <div className='sound'>
@@ -44,8 +60,9 @@ function MasterControl({ masterVolume, setVolume, activeCards }:
         return (
             <div className="master-controls">
                 <div className="active-card-container">
+                    <div className="playing-title">playing:</div>
                     {(activeCards.length >= 1) ? (activeCards.map
-                        (sound => <SoundCard key={sound.id} sound={sound} masterVolume={masterVolume} />)) : (emptySoundCard())}
+                        (sound => <SoundCard key={sound.id} sound={sound} masterVolume={masterVolume} removeCard={removeFromActiveCards} />)) : (emptySoundCard())}
                 </div>
                 <div className='controls-container'>
                     <input className="master-volume"
