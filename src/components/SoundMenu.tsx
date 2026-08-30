@@ -1,15 +1,36 @@
-import SoundCard from "./SoundCard";
-import { type categoryArray, allCategories, allSounds } from "../data/sounds";
+import MenuSoundCard from "./MenuSoundCard";
+import { type categoryArray, type SoundProps, allCategories, allSounds, maximumActiveCards } from "../data/sounds";
 import './SoundMenu.css';
 import { useState } from "react";
 
-function SoundMenu({ masterVolume }: { masterVolume: number }) {
+function SoundMenu({ masterVolume, activeCards, setActiveCards }: { masterVolume: number, activeCards: SoundProps[], setActiveCards: Function }) {
 
-    // const [activeCategories, setActiveCategories] = useState(allCategories);
     // maintain a list of categories, using allCategories as default.
     const [categoryArray, setCategoryArray] = useState(allCategories);
 
     const [sounds] = useState(allSounds);
+
+    function addToActiveCards(soundCardId: string) {
+        const tempActiveCards: SoundProps[] = activeCards ?? [];
+
+        // return early if activeCards is at its' maximum length, or this card ID is already active.
+        if (tempActiveCards.length >= maximumActiveCards) {
+            return;
+        } else if (tempActiveCards.find((sound) => sound.id === soundCardId)) {
+            return;
+        }
+        const found = sounds.find((sound) => sound.id === soundCardId);
+
+        // append the selected card to the end of the list of active cards,
+        // but only if the card was actually found.
+        if (!found) {
+            console.warn(`addToActiveCards: sound id not found: ${soundCardId}`);
+            return;
+        }
+
+        console.log(`adding ${found.id}`);
+        setActiveCards(tempActiveCards.concat(found));
+    }
 
     // use 0 and 1 for false and true to indicate whether any categories are active for 
     function areTheseCategoriesActive(categoryIds: number[]): number {
@@ -39,16 +60,6 @@ function SoundMenu({ masterVolume }: { masterVolume: number }) {
         setCategoryArray(tempCategoryArray);
     }
 
-    // when the categoryArray changes, process the changes to category for the sound cards:
-    // useEffect(() => {
-
-    // //sort the sound array to place cards in the active category first.
-    // // setSounds(sounds.sort((a, b) => areTheseCategoriesActive(b.categories) - areTheseCategoriesActive(a.categories)));
-
-    // console.log(categoryArray);
-    // console.log(sounds);
-    // }, [categoryArray])
-
     const sortedCards = [...sounds].sort((a, b) =>
         areTheseCategoriesActive(b.categories) - areTheseCategoriesActive(a.categories)
     );
@@ -76,18 +87,8 @@ function SoundMenu({ masterVolume }: { masterVolume: number }) {
                 {/* otherwise dispplay active-category cards first, followed by inactive-category cards (with a decreased opacity) */}
 
                 {sortedCards.map
-                    (sound => <SoundCard key={sound.id} sound={sound} masterVolume={masterVolume} isInActiveCategory={areTheseCategoriesActive(sound.categories)===1} />)}
+                    (sound => <MenuSoundCard key={sound.id} sound={sound} masterVolume={masterVolume} isInActiveCategory={areTheseCategoriesActive(sound.categories) === 1} onClick={addToActiveCards} />)}
 
-                {/* {(sounds.filter((s) => areTheseCategoriesActive(s.categories)).map
-                    (sound => {
-                        const isInActiveCategory: boolean = true;
-                        return (<SoundCard sound={sound} masterVolume={masterVolume} isInActiveCategory={isInActiveCategory} />)
-                    }))}
-                {(sounds.filter((s) => !areTheseCategoriesActive(s.categories)).map
-                    (sound => {
-                        const isInActiveCategory: boolean = false;
-                        return (<SoundCard sound={sound} masterVolume={masterVolume} isInActiveCategory={isInActiveCategory} />)
-                    }))} */}
             </div>
         </div>
     )

@@ -1,28 +1,77 @@
+div.sound.empty {
+    background: var(--text-h);
+    color: var(--bg);
+    font-weight: bold;
+    height: 159px;
+    padding: 15px;
+    padding-top: 80px;
 
-.floating-controls {
+    text-align: left;
+
+    margin-top: auto;
+    margin-bottom: auto;
+    max-width: calc(var(--card-width) - 30px);
+    width: calc(var(--card-width) - 30px);
+    min-width: calc(var(--card-width) - 30px);
+    text-wrap: wrap;
+}
+
+
+.master-controls {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    height: 280px;
+    width: fit-content;
+
+    bottom: 0px;
+    margin-top: auto;
+
+
+    right: 0px;
+
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
+    align-items: center;
+
+    background: var(--social-bg);
+
+    border: 2px solid var(--border)
+}
+
+.active-card-container {
+
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+
+    gap: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.playing-title {
+    writing-mode: sideways-lr;
+    padding: 10px;
+    align-self: flex-start;
+}
+
+.controls-container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     gap: 20px;
-    padding: 10px 20px;
-    background: var(--code-bg);
+    padding: 20px 20px;
     color: white;
-    border: 2px solid var(--border);
-    border-radius: 5px;
 
-    height: 40px;
-    width: fit-content;
+    height: fit-content;
     z-index: 999;
 }
 
 .mute-image {
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -40,6 +89,24 @@
     align-self: center;
 }
 
+.close-button {
+    appearance: none;
+    background:none;
+    border:none;
+    outline:none;
+    padding:0;
+    margin:0;
+    height:24px;
+    width:24px;
+    align-self: center;
+}
+
 input[type=range].master-volume {
   align-self:center;
+
+  writing-mode:vertical-lr;
+  direction: rtl;
+  height:100px;
+  vertical-align: middle;
+  width: 6px;
 }

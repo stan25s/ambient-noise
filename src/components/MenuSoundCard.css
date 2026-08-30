@@ -1,0 +1,71 @@
+div.menu-sound {
+    display: grid;
+    padding: 0;
+    border: 2px solid var(--text-h);
+    border-radius: 8px;
+    grid-template-columns: auto;
+    width: var(--card-width);
+    min-width: var(--card-width);
+    height: fit-content;
+    transition: border-color 0.15s ease-out, opacity 0.15s ease-out, margin-top 0.15s ease;
+    background-color: var(--bg);
+}
+
+div.menu-sound:hover {
+    margin-top:-10px;
+}
+
+img.sound-icon-menu {
+    padding: var(--card-image-padding);
+
+    width: calc(var(--card-width) - (var(--card-image-padding) * 2));
+    height: auto;
+}
+
+.card-bottom {
+    background-color: var(--text-h);
+    padding: var(--card-bottom-padding);
+    width: calc(var(--card-width) - (var(--card-bottom-padding) * 2));
+    height: 80px;
+
+    text-wrap: wrap;
+    text-align: left;
+    color: var(--bg);
+    line-height: 20px;
+
+    font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+    div.menu-sound {
+        width: var(--small-card-width);
+        min-width: var(--small-card-width);
+    }
+
+    img.sound-icon-menu {
+        padding: var(--small-card-image-padding);
+        width: calc(var(--small-card-width) - (var(--small-card-image-padding) * 2));
+    }
+
+    .card-bottom {
+        width: calc(var(--small-card-width) - (var(--card-bottom-padding) * 2));
+    }
+}
+
+/* sound category is active */
+div.menu-sound.true {
+    background-color: var(--card-active-notplaying-bg);
+}
+
+span {
+    width: 100%;
+}
+
+input {
+    width: 100%;
+}
+
+input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

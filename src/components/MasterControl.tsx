@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { SoundProps } from '../data/sounds.ts';
+import SoundCard from './SoundCard.tsx';
 import './MasterControl.css';
 
-function MasterControl({ masterVolume, setVolume }: { masterVolume: number, setVolume: Function }
+function MasterControl({ masterVolume, setVolume, activeCards, setActiveCards }:
+    { masterVolume: number, setVolume: Function, activeCards: SoundProps[], setActiveCards: Function }
 ) {
 
-    const [ masterIsMuted, setMasterIsMuted ] = useState(false);
+    const [masterIsMuted, setMasterIsMuted] = useState(false);
     const [volumeBeforeMute, setVolumeBeforeMute] = useState(masterVolume);
+
+    useEffect(() => {
+        console.log(activeCards);
+        console.log(`activecards.length=${activeCards.length}`);
+    }, [activeCards])
 
     function toggleMute() {
         if (masterIsMuted) {
@@ -20,26 +28,65 @@ function MasterControl({ masterVolume, setVolume }: { masterVolume: number, setV
         }
     }
 
-    return (
-        <div className="floating-controls">
-            <button className="mute-button"
-                title="mute"
-                onClick={() => toggleMute()}
-            >{
-                masterIsMuted ? 
-            (<img className="mute-image" src='icons/unmute-white.png'/>) : 
-            (<img className="mute-image" src='icons/mute-white.png'/>)}</button>
-            <input className="master-volume"
-                disabled={masterIsMuted}
-                type="range"
-                min={0}
-                max={1}
-                step={0.05}
-                value={masterVolume}
-                onChange={(e) => setVolume(parseFloat(e.target.value))}
-            />
-        </div>
-    )
+    function removeFromActiveCards(soundCardId: string) {
+        const foundIndex = activeCards.findIndex((sound) => sound.id === soundCardId);
+
+        if (foundIndex != -1) {
+            // create a new array instead of mutating the existing one so React
+            // sees a new reference and re-renders immediately
+            const tempActiveCards = (activeCards ?? []).filter((s) => s.id !== soundCardId);
+            setActiveCards(tempActiveCards);
+            console.log(`removing ${foundIndex}`);
+            return;
+        } else {
+            console.warn(`removeFromActiveCards: sound id not found: ${soundCardId}`);
+            return;
+        }
+    }
+
+    function emptySoundCard() {
+        return (
+            <div className="sound empty">
+                no cards selected...
+            </div>
+        )
+    }
+
+    try {
+        return (
+            <div className="master-controls">
+                <div className="active-card-container">
+                    <div className="playing-title">playing:</div>
+                    {(activeCards.length >= 1) ? (activeCards.map
+                        (sound => <SoundCard key={sound.id} sound={sound} masterVolume={masterVolume} removeCard={removeFromActiveCards} />)) : (emptySoundCard())}
+                </div>
+                <div className='controls-container'>
+                    <input className="master-volume"
+                        disabled={masterIsMuted}
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.05}
+                        value={masterVolume}
+                        onChange={(e) => setVolume(parseFloat(e.target.value))}
+                    />
+                    <button className="mute-button"
+                        title="mute"
+                        onClick={() => toggleMute()}>
+                        {masterIsMuted ?
+                            (<img className="mute-image" src='icons/unmute-white.png' />) :
+                            (<img className="mute-image" src='icons/mute-white.png' />)}
+                    </button>
+                </div>
+            </div>
+        )
+    } catch {
+        console.log('exception caught:');
+        console.log(activeCards.length);
+        console.log(activeCards);
+        throw new Error("exception");
+
+    }
 }
 
 export default MasterControl
