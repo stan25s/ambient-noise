@@ -63,29 +63,29 @@ img.sound-icon {
 }
 
 /* sound is active */
-div.sound.active {
+/* div.sound.active {
     border-color: var(--accent-border);
     background-color: var(--card-playing-bg);
-}
+} */
 
 div.sound.true {
     background-color: var(--card-active-notplaying-bg);
 }
 
 /* sound is active and category is active */
-div.sound.active.true {
+/* div.sound.active.true {
     background-color: var(--card-active-playing-bg);
-}
+} */
 
 
-div.sound.pending {
+/* div.sound.pending {
     border-color: var(--accent-border);
     opacity: 0.7;
-}
+} */
 
-div.sound.inactive {
+/* div.sound.inactive {
     opacity: 0.9;
-}
+} */
 
 div.sound.loading {
     opacity: 0.5;
@@ -155,6 +155,9 @@ input.card-volume-slider {
     background: var(--bg);
 }
 input.card-volume-slider::-webkit-slider-thumb {
+    background: var(--code-bg);
+}
+input.card-volume-slider::-moz-slider-thumb {
     background: var(--code-bg);
 }
 

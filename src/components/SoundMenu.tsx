@@ -5,7 +5,6 @@ import { useState } from "react";
 
 function SoundMenu({ masterVolume, activeCards, setActiveCards }: { masterVolume: number, activeCards: SoundProps[], setActiveCards: Function }) {
 
-    // const [activeCategories, setActiveCategories] = useState(allCategories);
     // maintain a list of categories, using allCategories as default.
     const [categoryArray, setCategoryArray] = useState(allCategories);
 
@@ -61,16 +60,6 @@ function SoundMenu({ masterVolume, activeCards, setActiveCards }: { masterVolume
         setCategoryArray(tempCategoryArray);
     }
 
-    // when the categoryArray changes, process the changes to category for the sound cards:
-    // useEffect(() => {
-
-    // //sort the sound array to place cards in the active category first.
-    // // setSounds(sounds.sort((a, b) => areTheseCategoriesActive(b.categories) - areTheseCategoriesActive(a.categories)));
-
-    // console.log(categoryArray);
-    // console.log(sounds);
-    // }, [categoryArray])
-
     const sortedCards = [...sounds].sort((a, b) =>
         areTheseCategoriesActive(b.categories) - areTheseCategoriesActive(a.categories)
     );
@@ -100,16 +89,6 @@ function SoundMenu({ masterVolume, activeCards, setActiveCards }: { masterVolume
                 {sortedCards.map
                     (sound => <MenuSoundCard key={sound.id} sound={sound} masterVolume={masterVolume} isInActiveCategory={areTheseCategoriesActive(sound.categories) === 1} onClick={addToActiveCards} />)}
 
-                {/* {(sounds.filter((s) => areTheseCategoriesActive(s.categories)).map
-                    (sound => {
-                        const isInActiveCategory: boolean = true;
-                        return (<SoundCard sound={sound} masterVolume={masterVolume} isInActiveCategory={isInActiveCategory} />)
-                    }))}
-                {(sounds.filter((s) => !areTheseCategoriesActive(s.categories)).map
-                    (sound => {
-                        const isInActiveCategory: boolean = false;
-                        return (<SoundCard sound={sound} masterVolume={masterVolume} isInActiveCategory={isInActiveCategory} />)
-                    }))} */}
             </div>
         </div>
     )

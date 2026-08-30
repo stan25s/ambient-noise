@@ -1,19 +1,41 @@
+div.sound.empty {
+    background: var(--text-h);
+    color: var(--bg);
+    font-weight: bold;
+    height: 159px;
+    padding: 15px;
+    padding-top: 80px;
+
+    text-align: left;
+
+    margin-top: auto;
+    margin-bottom: auto;
+    max-width: calc(var(--card-width) - 30px);
+    width: calc(var(--card-width) - 30px);
+    min-width: calc(var(--card-width) - 30px);
+    text-wrap: wrap;
+}
+
 
 .master-controls {
     position: fixed;
     height: 280px;
-    width: 100%;
+    width: fit-content;
 
     bottom: 0px;
     margin-top: auto;
 
+
+    right: 0px;
 
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
 
-    background: var(--code-bg);
+    background: var(--social-bg);
+
+    border: 2px solid var(--border)
 }
 
 .active-card-container {

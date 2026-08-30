@@ -1,4 +1,3 @@
-//import SoundControl from '../SoundControl.tsx';
 import type { SoundProps } from '../data/sounds.ts';
 import './MenuSoundCard.css';
 

@@ -46,16 +46,12 @@ function MasterControl({ masterVolume, setVolume, activeCards, setActiveCards }:
 
     function emptySoundCard() {
         return (
-            <div className='sound'>
-                select any card above to start building your sound deck
+            <div className="sound empty">
+                no cards selected...
             </div>
         )
     }
 
-    // function renderActiveCards(): ReactNode {
-    //     return (activeCards.map
-    //             (sound => <SoundCard key={sound.id} sound={sound} masterVolume={masterVolume} />))
-    // }
     try {
         return (
             <div className="master-controls">
