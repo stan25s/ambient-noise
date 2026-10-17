@@ -41,4 +41,15 @@ h1 {
   width: 100%;
 }
 
+@media (max-width: 1024px) {
+  p {
+    margin-left: 40px;
+    margin-right: 40px
+  }
+  h1 {
+    align-self: flex-start;
+    margin-left: 40px;
+  }
+}
+
 

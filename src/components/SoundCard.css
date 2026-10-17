@@ -60,6 +60,19 @@ img.sound-icon {
         padding: var(--small-card-image-padding);
         width: calc(var(--small-card-width) - (var(--small-card-image-padding) * 2));
     }
+
+    .close-button {
+        transition: none;
+        opacity: 1;
+    }
+
+    .card-block {
+        transition: none;
+    }
+
+    .card-block:hover {
+        transform: none;
+    }
 }
 
 /* sound is active */
