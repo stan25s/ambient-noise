@@ -2,7 +2,7 @@ div.sound.empty {
     background: var(--text-h);
     color: var(--bg);
     font-weight: bold;
-    height: 159px;
+    height: 149px;
     padding: 15px;
     padding-top: 80px;
 
@@ -16,11 +16,30 @@ div.sound.empty {
     text-wrap: wrap;
 }
 
+@media (max-width: 1024px) {
+    div.sound.empty {
+        max-width: calc(var(--small-card-width) - 16px);
+        width: calc(var(--small-card-width) - 16px);
+        min-width: calc(var(--small-card-width) - 16px);
+        height: 119px;
+
+        padding: 15px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-top: 70px;
+
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
+
 
 .master-controls {
     position: fixed;
-    height: 280px;
+    height: fit-content;
     width: fit-content;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     bottom: 0px;
     margin-top: auto;
